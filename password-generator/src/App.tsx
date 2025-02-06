@@ -1,17 +1,18 @@
 import "@fontsource/Montserrat";
 import Password from "./components/Password";
 import PasswordValidationCard from "./components/PasswordValidationCard";
-import { Container, CssBaseline } from "@mui/material";
+import { Container } from "@mui/material";
 import { darkTheme } from "./theme/darkTheme";
 import { lightTheme } from "./theme/lightTheme";
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 
 function App() {
-  console.log(darkTheme)
+  // console.log(darkTheme);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+  const [generatedPass, setGeneratedPass] = useState<string | number>("");
 
-  console.log(isDarkMode)
+  // console.log(isDarkMode);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -23,11 +24,14 @@ function App() {
           flexDirection: "column",
           alignItems: "center",
           paddingY: "2rem",
-          border: "1px solid #464646"
+          border: "1px solid #464646",
         }}
       >
-        <Password isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-        <PasswordValidationCard isDarkMode={isDarkMode} />
+        <Password isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} generatedPass={generatedPass} />
+        <PasswordValidationCard
+          isDarkMode={isDarkMode}
+          setGeneratedPass={setGeneratedPass}
+        />
       </Container>
     </ThemeProvider>
   );
