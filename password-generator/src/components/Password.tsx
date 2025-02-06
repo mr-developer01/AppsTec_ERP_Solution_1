@@ -1,78 +1,23 @@
-import { useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Box, Container, Typography, IconButton, CssBaseline, Switch } from "@mui/material";
+import React from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import {
+  Box,
+  Typography,
+  IconButton,
+  CssBaseline,
+  Switch,
+} from "@mui/material";
 import { ContentCopy } from "@mui/icons-material";
+import { darkTheme } from "../theme/darkTheme";
+import { lightTheme } from "../theme/lightTheme";
 
-// Define light theme
-const lightTheme = createTheme({
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#1976d2", // Blue
-    },
-    background: {
-      default: "#f5f5f5", // Light gray
-      paper: "#BDBDBD", // White
-    },
-    text: {
-      primary: "#292929", // Black
-      secondary: "#7C7C7C", // Gray
-    },
-  },
-  typography: {
-    fontFamily: "Rubik, Arial, sans-serif",
-    h1: {
-      fontWeight: 700,
-    },
-    body1: {
-      fontWeight: 400,
-    },
-    h2: {
-      fontFamily: "Montserrat, Arial, sans-serif",
-      fontWeight: 700,
-    },
-    button: {
-      fontWeight: 500,
-    },
-  },
-});
+interface ThemeMode {
+  isDarkMode: boolean;
+  setIsDarkMode: (value: boolean) => void;
+}
 
-// Define dark theme
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#90caf9", // Light blue
-    },
-    background: {
-      default: "#292929", // Dark gray
-      paper: "#3D3D3D", // Darker gray
-    },
-    text: {
-      primary: "#BDBDBD",
-      secondary: "#7C7C7C",
-    },
-  },
-  typography: {
-    fontFamily: "Rubik, Arial, sans-serif",
-    h1: {
-      fontWeight: 700,
-    },
-    body1: {
-      fontWeight: 400,
-    },
-    h2: {
-      fontFamily: "Montserrat, Arial, sans-serif",
-      fontWeight: 700,
-    },
-    button: {
-      fontWeight: 500,
-    },
-  },
-});
-
-function Password() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+const Password: React.FC<ThemeMode> = ({ isDarkMode, setIsDarkMode }) => {
+  //   const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Toggle between dark and light themes
   const toggleTheme = () => {
@@ -81,18 +26,8 @@ function Password() {
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <CssBaseline /> {/* Reset CSS and apply background color */}
-      <Container
-        maxWidth="lg"
-        sx={{
-          backgroundColor: "background.default",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          paddingY: "2rem",
-          minHeight: "100vh",
-        }}
-      >
+      <CssBaseline />
+     
         {/* Theme Toggle Switch */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <Typography variant="body1">Toggle Theme</Typography>
@@ -122,12 +57,14 @@ function Password() {
             <Typography variant="h4">P4$W0rD!</Typography>
           </Box>
           <IconButton>
-            <ContentCopy fontSize="large" color={isDarkMode ? "primary" : "secondary"} />
+            <ContentCopy
+              fontSize="large"
+              color={isDarkMode ? "primary" : "secondary"}
+            />
           </IconButton>
         </Box>
-      </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default Password;
