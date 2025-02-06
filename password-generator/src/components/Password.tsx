@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box, Container, Typography, IconButton, CssBaseline, Switch } from "@mui/material";
 import { ContentCopy } from "@mui/icons-material";
