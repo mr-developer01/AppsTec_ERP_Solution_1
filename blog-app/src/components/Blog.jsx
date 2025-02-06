@@ -7,15 +7,15 @@ const Blog = () => {
   return (
     <>
       <Box>
-        {/* <Box>
+        <Box>
           <Typography variant="h3" style={{ fontWeight: 500 }} gutterBottom>
             Blog
           </Typography>
           <Typography variant="body2">
             Stay in the loop with the latest about our products
           </Typography>
-        </Box> */}
-        {/* <BlogNav /> */}
+        </Box>
+        <BlogNav />
         <Grid container spacing={2} sx={{width: "100%"}}>
           <Grid size={{ sm: 12, md: 12, lg: 6 }}>
             <BlogCard />
