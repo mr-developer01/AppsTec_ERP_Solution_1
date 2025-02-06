@@ -7,7 +7,7 @@ import MuiAppBar from './components/MuiAppBar'
 const App = () => {
   return (
     <Container maxWidth="lg" >
-      {/* <Nav /> */}
+      <Nav />
       <MuiAppBar />
       <Blog />
     </Container>
