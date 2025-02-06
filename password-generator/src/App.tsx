@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 
 function App() {
+  console.log(darkTheme)
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
 
   console.log(isDarkMode)
