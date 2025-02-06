@@ -6,11 +6,13 @@ import {
   FormGroup,
   Slider,
   Typography,
+  IconButton,
 } from "@mui/material";
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme } from "../theme/darkTheme";
 import { lightTheme } from "../theme/lightTheme";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 interface ThemeMode {
   isDarkMode: boolean;
@@ -19,9 +21,9 @@ interface ThemeMode {
 const PasswordValidationCard: React.FC<ThemeMode> = ({ isDarkMode }) => {
   const [minCharLen, setMinCharLen] = useState<number>(6);
 
-  const handleSlider = (event, newValue) => {
+  const handleSlider = (event: any, newValue: any) => {
     if (newValue >= 6) {
-      setMinCharLen(newValue);
+      setMinCharLen(event.target.value);
     }
 
     // setMinCharLen(newValue);
@@ -36,7 +38,7 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({ isDarkMode }) => {
         sx={{
           width: "80%",
           color: "text.secondary",
-          backgroundColor: "background.paper",
+          BackgroundColor: "background.paper",
         }}
         className="abc"
       >
@@ -64,7 +66,7 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({ isDarkMode }) => {
             valueLabelDisplay="auto"
             max={50}
             disabled={minCharLen < 6}
-            sx={{color: "black"}}
+            sx={{ color: "#3D3D3D" }}
           />
         </Box>
         <Box px={6}>
@@ -87,7 +89,32 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({ isDarkMode }) => {
             />
           </FormGroup>
         </Box>
-        <Box></Box>
+        <Box
+          px={6}
+          mt={2}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography>STRENGTH</Typography>
+          <Box sx={{ display: "flex", gap: ".5rem" }}>
+            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+          </Box>
+        </Box>
+        <Box mt={4} sx={{display: "flex", alignItems: "center", justifyContent: "center", gap: 2,backgroundColor: "#A4FFAF"}}>
+          <Typography variant="h2" sx={{fontSize: "1.4rem"}}>GENERATE</Typography>
+          <IconButton>
+            <ArrowForward
+              fontSize="large"
+              color={isDarkMode ? "primary" : "secondary"}
+            />
+          </IconButton>
+        </Box>
       </Box>
     </ThemeProvider>
   );
