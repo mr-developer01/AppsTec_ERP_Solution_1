@@ -1,7 +1,6 @@
 import {
   Box,
   Checkbox,
-  CssBaseline,
   FormControlLabel,
   FormGroup,
   Slider,
@@ -12,14 +11,27 @@ import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme } from "../theme/darkTheme";
 import { lightTheme } from "../theme/lightTheme";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowForward } from "@mui/icons-material";
+import { usePasswordGenerator } from "./hooks/usePasswordGenerator";
 
 interface ThemeMode {
   isDarkMode: boolean;
+  setGeneratedPass: (newVal: string | number) => void;
 }
 
-const PasswordValidationCard: React.FC<ThemeMode> = ({ isDarkMode }) => {
+const PasswordValidationCard: React.FC<ThemeMode> = ({
+  isDarkMode,
+  setGeneratedPass,
+}) => {
+
   const [minCharLen, setMinCharLen] = useState<number>(6);
+  const [chooseOptions, setChooseOptions] = useState<number>(0);
+
+  const genPass = () => {
+    setGeneratedPass(usePasswordGenerator(minCharLen))
+    const password = usePasswordGenerator(10);
+    console.log(password);
+  };
 
   const handleSlider = (event: any, newValue: any) => {
     if (newValue >= 6) {
@@ -106,8 +118,21 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({ isDarkMode }) => {
             <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
           </Box>
         </Box>
-        <Box mt={4} sx={{display: "flex", alignItems: "center", justifyContent: "center", gap: 2,backgroundColor: "#A4FFAF"}}>
-          <Typography variant="h2" sx={{fontSize: "1.4rem"}}>GENERATE</Typography>
+        <Box
+          mt={4}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+            backgroundColor: "#A4FFAF",
+            cursor: "pointer",
+          }}
+          onClick={genPass}
+        >
+          <Typography variant="h2" sx={{ fontSize: "1.4rem" }}>
+            GENERATE
+          </Typography>
           <IconButton>
             <ArrowForward
               fontSize="large"

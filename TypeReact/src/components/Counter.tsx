@@ -15,4 +15,4 @@ const Counter: React.FC<Increse> = ({count, inc}) => {
   )
 }
 
-export default Counter
+export default Counter;
