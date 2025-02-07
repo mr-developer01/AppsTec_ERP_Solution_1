@@ -23,7 +23,7 @@ const Password: React.FC<ThemeMode> = ({
   generatedPass,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
-  const textRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
 
   // console.log(textRef, "TextRef....");
 
@@ -85,7 +85,7 @@ const Password: React.FC<ThemeMode> = ({
         </Box>
         <IconButton>
           <ContentCopy
-            onClick={() => handleCopy(textRef.current.innerText)}
+            onClick={() => handleCopy(textRef?.current?.innerText || "")}
             fontSize="large"
             color={isDarkMode ? "primary" : "secondary"}
           />
