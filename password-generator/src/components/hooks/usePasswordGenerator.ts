@@ -4,6 +4,7 @@ export const usePasswordGenerator = (length: number): string | number => {
   const numbers = "0123456789";
   const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
+
   if (length < 6) {
     return "Password must be at least 6 characters";
   }
