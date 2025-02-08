@@ -7,12 +7,14 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme } from "../theme/darkTheme";
 import { lightTheme } from "../theme/lightTheme";
 import { ArrowForward } from "@mui/icons-material";
 import { usePasswordGenerator } from "./hooks/usePasswordGenerator";
+import { useStrength } from "./hooks/useStrength";
+import { useCheckStrength } from "./hooks/useCheckStrength";
 
 interface ThemeMode {
   isDarkMode: boolean;
@@ -23,23 +25,34 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({
   isDarkMode,
   setGeneratedPass,
 }) => {
-
   const [minCharLen, setMinCharLen] = useState<number>(6);
-  const [chooseOptions, setChooseOptions] = useState<number>(0);
+  const [chooseOptions, setChooseOptions] = useState<any>({
+    lowerCase: true,
+    upperCase: true,
+    symbols: true,
+    nums: true,
+  });
+
+  const genResultPass = usePasswordGenerator(minCharLen, chooseOptions);
+  const NumberOfboxNotTick = useStrength(chooseOptions);
+  const strength = useCheckStrength(NumberOfboxNotTick, genResultPass);
+  console.log(strength);
 
   const genPass = () => {
-    setGeneratedPass(usePasswordGenerator(minCharLen))
-    const password = usePasswordGenerator(10);
-    console.log(password);
+    setGeneratedPass(genResultPass);
   };
 
   const handleSlider = (event: any, newValue: any) => {
     if (newValue >= 6) {
       setMinCharLen(event.target.value);
     }
+  };
 
-    // setMinCharLen(newValue);
-    // console.log(event, newValue);
+  const handleCheck = (key: string) => {
+    setChooseOptions((prev: any) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
   return (
@@ -84,20 +97,24 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({
         <Box px={6}>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox checked={chooseOptions.upperCase} />}
               label="Include Uppercase Letters"
+              onClick={() => handleCheck("upperCase")}
             />
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox checked={chooseOptions.lowerCase} />}
               label="Include Lowercase Letters"
+              onClick={() => handleCheck("lowerCase")}
             />
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox checked={chooseOptions.nums} />}
               label="Include Numbers"
+              onClick={() => handleCheck("nums")}
             />
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox checked={chooseOptions.symbols} />}
               label="Include Symbols"
+              onClick={() => handleCheck("symbols")}
             />
           </FormGroup>
         </Box>
@@ -112,10 +129,23 @@ const PasswordValidationCard: React.FC<ThemeMode> = ({
         >
           <Typography>STRENGTH</Typography>
           <Box sx={{ display: "flex", gap: ".5rem" }}>
-            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
-            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
-            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
-            <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            {strength === "excellent" && (
+              <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            )}
+            {(strength === "strong" || strength === "excellent") && (
+              <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            )}
+            {(strength === "good" ||
+              strength === "strong" ||
+              strength === "excellent") && (
+              <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            )}
+            {(strength === "weak" ||
+              strength === "good" ||
+              strength === "strong" ||
+              strength === "excellent") && (
+              <Box py={1} px={0.2} sx={{ border: "1px solid #989898" }}></Box>
+            )}
           </Box>
         </Box>
         <Box
