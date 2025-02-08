@@ -5,17 +5,20 @@ import { AuthorContex } from "./store/authorContext";
 import Table from "./components/table";
 import ImageGrid from "./components/ImageGrid";
 import { useControlData } from "./hooks/useControlData";
+import PaginationButton from "./components/PaginationButton";
 
 const App = () => {
   const [limit, setLimit] = useState(10);
-  const authorData = useControlData(limit);
+  const [page, setPage] = useState(1);
+  const authorData = useControlData(limit, page);
 
-  console.log(authorData);
+  // console.log(authorData);
   
 
   return (
     <>
       <ImageGrid authorData={authorData} />
+      <PaginationButton />
     </>
   );
 };
