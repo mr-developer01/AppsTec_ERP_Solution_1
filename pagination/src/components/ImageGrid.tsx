@@ -26,16 +26,17 @@ const ImageGrid = ({ authorData }) => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {authorData.map((data) => (
-            <Grid size={{ sm: 12, md: 6, lg: 3 }} key={data.id}>
+            <Grid size={{xs:12, sm: 12, md: 6, lg: 3 }} key={data.id}>
               <Item>
-                <Box sx={{ width: "100%", backgroundColor: "#e7c6ff" }}>
+                <Box sx={{ width: "100%" }}>
                   <Box
                     component="img"
                     sx={{
-                      height: 233,
-                      width: 350,
-                      maxHeight: { xs: 233, md: 167 },
-                      maxWidth: { xs: 350, md: 250 },
+                      height: 200,
+                      width: "90%",
+                      borderRadius: "20px",
+                      // maxHeight: { xs: 233, md: 167 },
+                      // maxWidth: { xs: 350, md: 250 },
                     }}
                     alt="The house from the offer."
                     src={data?.download_url}

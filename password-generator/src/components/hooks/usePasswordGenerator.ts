@@ -5,6 +5,7 @@ export const usePasswordGenerator = (
   let allChars = "";
   let password = "";
 
+
   if (length < 6) {
     return "Password must be at least 6 characters";
   }
