@@ -13,13 +13,16 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { pageArray } from "../utils/constants";
 
 const PaginationButton = ({ page, setPage, totalLength }) => {
-  const [pages, setPages] = React.useState("");
+  const [pages, setPages] = React.useState(page);
+  const totalPages = Math.ceil(totalLength / 10);
 
   console.log(totalLength);
 
   const handleChange = (event: any) => {
     console.log(event);
-    setPages(page);
+    const selectedPage = event.target.value;
+    setPages(selectedPage);
+    setPage(selectedPage);
   };
 
   const handlePrev = () => {
@@ -76,7 +79,7 @@ const PaginationButton = ({ page, setPage, totalLength }) => {
         </Button>
       </Stack>
       <Box
-      mt={4}
+        mt={4}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -97,11 +100,15 @@ const PaginationButton = ({ page, setPage, totalLength }) => {
             onChange={handleChange}
           >
             <MenuItem value="">
-              <em>None</em>
+              <em>Pages</em>
             </MenuItem>
-            <MenuItem value={page}>1</MenuItem>
-            <MenuItem value={page}>2</MenuItem>
-            <MenuItem value={page}>3</MenuItem>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (num) => (
+                <MenuItem key={num} value={num}>
+                  {num}
+                </MenuItem>
+              )
+            )}
           </Select>
         </FormControl>
       </Box>
