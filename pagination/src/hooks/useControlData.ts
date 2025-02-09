@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useControlData = (limit, page) => {
+export const useControlData = (limit, page, setLimit) => {
   const [authorData, setAuthorData] = useState(null);
   const [totalLength, setTotalLength] = useState(0);
   // let totalLength;

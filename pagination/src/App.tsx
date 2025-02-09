@@ -11,9 +11,7 @@ const App = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   console.log(page)
-  const {authorData, totalLength} = useControlData(limit, page);
-
-  // console.log(authorData);
+  const {authorData, totalLength} = useControlData(limit, page, setLimit);
   
 
   return (
