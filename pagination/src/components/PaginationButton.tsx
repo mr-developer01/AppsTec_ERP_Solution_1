@@ -43,7 +43,7 @@ const PaginationButton = ({ page, setPage, totalLength }) => {
         sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       >
         <Button
-          variant="contained"
+          variant="outlined"
           sx={{ paddingX: 2, paddingY: 2, borderRadius: "100%" }}
           onClick={handlePrev}
         >
@@ -71,7 +71,7 @@ const PaginationButton = ({ page, setPage, totalLength }) => {
           </>
         )}
         <Button
-          variant="contained"
+          variant="outlined"
           sx={{ paddingX: 2, paddingY: 2, borderRadius: "100%" }}
           onClick={handleNext}
         >
