@@ -10,7 +10,8 @@ import PaginationButton from "./components/PaginationButton";
 const App = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-  const authorData = useControlData(limit, page);
+  console.log(page)
+  const {authorData, totalLength} = useControlData(limit, page);
 
   // console.log(authorData);
   
@@ -18,7 +19,7 @@ const App = () => {
   return (
     <>
       <ImageGrid authorData={authorData} />
-      <PaginationButton />
+      <PaginationButton page={page} setPage={setPage} totalLength={totalLength} />
     </>
   );
 };

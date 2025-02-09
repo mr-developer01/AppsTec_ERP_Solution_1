@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 
 export const useControlData = (limit, page) => {
   const [authorData, setAuthorData] = useState(null);
-  const showData = page * limit;
+  const [totalLength, setTotalLength] = useState(0);
+  // let totalLength;
+  const showData = (page - 1) * limit;
 
-  const limitData = (page + 1) * limit;
+  const limitData = (page) * limit;
   
   useEffect(() => {
     const fetchUserData = async () => {
@@ -13,12 +15,15 @@ export const useControlData = (limit, page) => {
       );
 
       const readableData = await bufferData.json();
+      setTotalLength(readableData.length);
 
-      page === 0 && setAuthorData(readableData.slice(showData, limitData));
-      page > 0 && setAuthorData(readableData.slice(showData + 1, limitData + 1));
+      page === 1 && setAuthorData(readableData.slice(showData, limitData));
+      page > 1 && setAuthorData(readableData.slice(showData + 1, limitData + 1));
     };
     fetchUserData()
-  }, []);
+  }, [page]);
 
-  return authorData
+  console.log(totalLength, "useControllData") ;
+
+  return {authorData, totalLength}
 };

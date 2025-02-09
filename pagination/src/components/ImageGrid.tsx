@@ -32,8 +32,8 @@ const ImageGrid = ({ authorData }) => {
                   <Box
                     component="img"
                     sx={{
-                      height: 400,
-                      width: "100%",
+                      height: 200,
+                      width: "90%",
                       borderRadius: "20px",
                       // maxHeight: { xs: 233, md: 167 },
                       // maxWidth: { xs: 350, md: 250 },
