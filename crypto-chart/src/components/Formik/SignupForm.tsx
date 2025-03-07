@@ -1,18 +1,8 @@
-import { useFormik } from "formik";
-import React from "react";
+
+import { useValidation } from "../../hooks/useValidation";
 
 const SignupForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
-    onSubmit: (values) => {
-      console.log(values);
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const { formik } = useValidation();
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -24,6 +14,7 @@ const SignupForm = () => {
           onChange={formik.handleChange}
           value={formik.values.firstName}
         />
+        {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
 
         <label htmlFor="lastName">Last Name</label>
         <input
@@ -33,6 +24,7 @@ const SignupForm = () => {
           onChange={formik.handleChange}
           value={formik.values.lastName}
         />
+        {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
 
         <label htmlFor="email">Email Address</label>
         <input
@@ -42,6 +34,7 @@ const SignupForm = () => {
           onChange={formik.handleChange}
           value={formik.values.email}
         />
+        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
         <button type="submit">Submit</button>
       </form>

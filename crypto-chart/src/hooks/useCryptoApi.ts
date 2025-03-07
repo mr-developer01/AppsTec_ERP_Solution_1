@@ -50,17 +50,15 @@ export const useCryptoApi = () => {
         const date = new Date(timestamp);
         const options = {
           timeZone: "Asia/Kolkata",
-          day: "numeric" // Only show the day in numeric form
+          day: "numeric"
         };
-        return Number(new Intl.DateTimeFormat('en-IN', options).format(date)); // Return as a number
+        return Number(new Intl.DateTimeFormat('en-IN', options).format(date));
       }
       
-      // Loop through the array and replace the 'date' field with the day only
       convertedTimeData.forEach(item => {
         item.date = convertDateToDayNumber(item.date);
       });
 
-      // Output the updated array
       console.log(convertedTimeData);
       setCurrency(convertedTimeData);
     }

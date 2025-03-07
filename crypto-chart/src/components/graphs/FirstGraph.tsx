@@ -1,5 +1,4 @@
 import {
-  LineChart,
   Line,
   CartesianGrid,
   XAxis,
@@ -10,7 +9,6 @@ import {
   AreaChart,
   Area,
   ComposedChart,
-  Bar,
 } from "recharts";
 import { useCryptoApi } from "../../hooks/useCryptoApi";
 
